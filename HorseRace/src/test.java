@@ -23,7 +23,7 @@ public class test {
             }
         }
 
-        System.out.printf("\n%s Wins!\n", board.get(15).pop().getColour());
+        System.out.printf("\n\n%s Wins!\n\n", board.get(15).pop().getColour());
 
     }
 
