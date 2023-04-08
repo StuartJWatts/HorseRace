@@ -17,11 +17,11 @@ public class Player {
         setMoney(3);
         roundBets = new ArrayList<>();
         raceBets = new ArrayList<>();
-        raceBets.add(new RaceBet("Red"));
-        raceBets.add(new RaceBet("Green"));
-        raceBets.add(new RaceBet("Blue"));
-        raceBets.add(new RaceBet("Yellow"));
-        raceBets.add(new RaceBet("Purple"));
+        raceBets.add(new RaceBet("red"));
+        raceBets.add(new RaceBet("green"));
+        raceBets.add(new RaceBet("blue"));
+        raceBets.add(new RaceBet("yellow"));
+        raceBets.add(new RaceBet("purple"));
     }
 
     // Setters and Getters
@@ -47,6 +47,15 @@ public class Player {
 
     public ArrayList<RoundBet> getRoundBets() {
         return roundBets;
+    }
+
+    public RaceBet placeRaceBet(String colour) {
+        // remove racebet of a certain colour from hand and return it
+        // deal with capitals here?
+        // make all lower case?
+        // when user enters in the command line, hide the entry
+        // https://stackoverflow.com/questions/10819469/hide-input-on-command-line
+        return null;
     }
 
     // Methods

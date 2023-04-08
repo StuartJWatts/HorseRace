@@ -1,16 +1,15 @@
 public class Horse {
     // Attributes
     private String colour;
-    private int currentPosition;
 
     // Constuctors
     public Horse() {
-        this("White", 0);
+        this("White");
     }
 
-    public Horse(String colour, int currentPosition) {
+    public Horse(String colour) {
         setColour(colour);
-        setCurrentPosition(currentPosition);
+
     }
     // Setters and Getters
 
@@ -22,15 +21,10 @@ public class Horse {
         return colour;
     }
 
-    public void setCurrentPosition(int currentPosition) {
-        if (currentPosition > 0 && currentPosition < 16) {
-            this.currentPosition = currentPosition;
-        }
-    }
-
-    public int getCurrentPosition() {
-        return currentPosition;
-    }
     // Methods
+
+    public String toString() {
+        return (colour);
+    }
 
 }
