@@ -47,16 +47,26 @@ public class test {
                         break;
                     }
                     case 2: {
-                        System.out.println("which colour would you like");
-                        String betChoice = in.next();
-                        System.out.println(betChoice);
+                        RoundBet bet = null;
+                        while (bet == null) {
+                            System.out.println("which colour would you like");
+                            String betChoice = in.next();
+                            bet = getRoundBet(betChoice, roundBets);
+                            if (bet == null) {
+                                System.out.print("that stack is empty");
+                            }
+
+                        }
+                        currentPlayer.addRoundBet(bet);
                         break;
                     }
                     case 3: {
                         System.out.println("Place race bet");
                         break;
                     }
+
                 }
+
                 if (gameOver)
                     break;
 
@@ -71,6 +81,25 @@ public class test {
 
         System.out.printf("\n\n%s wins!!!\n\n", board.get(15).pop().getColour());
 
+    }
+
+    public static RoundBet getRoundBet(String colour, ArrayList<Stack<RoundBet>> roundBets) {
+        // get index that contains that colour
+        int index = 0;// index of stack that contains the horse that is rolled
+        int i = 0;
+        for (Stack<RoundBet> stack : roundBets) {
+            if (stack.peek().getColour() == colour) {
+                index = i;
+                break;
+            }
+            i++;
+        }
+        // get bet on the top of that stack
+        if (roundBets.get(index).size() > 0) {
+            return roundBets.get(index).pop();
+        } else {
+            return null;
+        }
     }
 
 }

@@ -10,6 +10,8 @@ import java.util.Stack;
  * -add money tracking 
  * -add jump forward and reverse card\
  * -add reverse horses
+ * -make user redo turn choice if roundbet stack is empty of does not have race bet left
+ * -hide racebet colour entry field
  * 
  */
 
@@ -188,10 +190,10 @@ public class Game {
             roundBets.add(new Stack<RoundBet>());
         }
         for (Stack<RoundBet> colourStack : roundBets) {
-            colourStack.add(new RoundBet(colours[index], 5));
+            colourStack.add(new RoundBet(colours[index], 2));
+            colourStack.add(new RoundBet(colours[index], 2));
             colourStack.add(new RoundBet(colours[index], 3));
-            colourStack.add(new RoundBet(colours[index], 2));
-            colourStack.add(new RoundBet(colours[index], 2));
+            colourStack.add(new RoundBet(colours[index], 5));
             index++;
         }
 
