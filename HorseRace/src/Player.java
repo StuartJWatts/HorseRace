@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Player {
     // Attributes
@@ -63,6 +64,22 @@ public class Player {
     public void addMoney(int money) {
         int currentMoney = this.getMoney();
         this.setMoney(currentMoney + money);
+    }
+
+    public void calculateRoundBets(String firstPlace, String secondPlace) {
+        Iterator<RoundBet> x = this.getRoundBets().iterator();
+        while (x.hasNext()) {
+            RoundBet bet = (RoundBet) x.next();
+            if (bet.getColour() == firstPlace) {
+                this.addMoney(bet.getValue());
+            } else if (bet.getColour() == secondPlace) {
+                this.addMoney(1);
+            } else {
+                this.addMoney(-1);
+            }
+        }
+        this.getRoundBets().clear();
+
     }
 
 }

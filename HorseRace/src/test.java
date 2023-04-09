@@ -44,6 +44,7 @@ public class test {
                     case 1: {
                         gameOver = Game.moveHorse(board, dieStack);
                         Game.displayBoard(board);
+                        currentPlayer.addMoney(1);
                         break;
                     }
                     case 2: {
@@ -51,7 +52,7 @@ public class test {
                         while (bet == null) {
                             System.out.println("which colour would you like");
                             String betChoice = in.next();
-                            bet = getRoundBet(betChoice, roundBets);
+                            bet = Game.getRoundBet(betChoice, roundBets);
                             if (bet == null) {
                                 System.out.print("that stack is empty");
                             }
@@ -77,29 +78,22 @@ public class test {
                 }
 
             }
+            System.out.println("round over\n");
+            // get first and second place at end of round
+            String[] winners = Game.getWinners(board);
+            for (String winner : winners) {
+                System.out.println(winner);
+            }
+
+            // loop through players and add up round bets
+            Iterator<Player> x = players.iterator();
+            while (x.hasNext()) {
+                x.next().calculateRoundBets(null, null);
+            }
         }
 
         System.out.printf("\n\n%s wins!!!\n\n", board.get(15).pop().getColour());
 
-    }
-
-    public static RoundBet getRoundBet(String colour, ArrayList<Stack<RoundBet>> roundBets) {
-        // get index that contains that colour
-        int index = 0;// index of stack that contains the horse that is rolled
-        int i = 0;
-        for (Stack<RoundBet> stack : roundBets) {
-            if (stack.peek().getColour() == colour) {
-                index = i;
-                break;
-            }
-            i++;
-        }
-        // get bet on the top of that stack
-        if (roundBets.get(index).size() > 0) {
-            return roundBets.get(index).pop();
-        } else {
-            return null;
-        }
     }
 
 }

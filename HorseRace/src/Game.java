@@ -199,4 +199,53 @@ public class Game {
 
         return roundBets;
     }
+
+    public static RoundBet getRoundBet(String colour, ArrayList<Stack<RoundBet>> roundBets) {
+        // get index that contains that colour
+        int index = 0;// index of stack that contains the horse that is rolled
+        int i = 0;
+        for (Stack<RoundBet> stack : roundBets) {
+            if (stack.peek().getColour() == colour) {
+                index = i;
+                break;
+            }
+            i++;
+        }
+        // get bet on the top of that stack
+        if (roundBets.get(index).size() > 0) {
+            return roundBets.get(index).pop();
+        } else {
+            return null;
+        }
+    }
+
+    public static String[] getWinners(ArrayList<Stack<Horse>> board) {
+        // find last stack that is non zero
+        // check if last non zero has more than one
+        // if more than one, take top 2
+        // if only one get the first then get the next stack that is non zero
+        // get second place horse
+        String[] winners = new String[2];
+        int stringIndex = 0;
+        ArrayList<Stack<Horse>> temp = (ArrayList<Stack<Horse>>) board.clone();
+        for (int i = temp.size() - 1; i > 0; i--) {
+            if (temp.get(i).size() > 1) {// get the colour of the two top horses
+                while (!temp.get(i).isEmpty() && stringIndex < 2) {
+
+                    winners[stringIndex] = temp.get(i).pop().getColour();
+                    stringIndex++;
+                    break;
+                }
+            } else if ((temp.get(i).size() == 1) && stringIndex < 2) {
+
+                winners[stringIndex] = temp.get(i).pop().getColour();
+                stringIndex++;
+            } else {
+                continue;
+            }
+        }
+
+        return winners;
+
+    }
 }
