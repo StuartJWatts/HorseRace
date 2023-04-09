@@ -1,5 +1,17 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 import java.util.Stack;
+
+/*
+ * ToDo
+ * -add round bets
+ * -add race bets
+ * -add money tracking 
+ * -add jump forward and reverse card\
+ * -add reverse horses
+ * 
+ */
 
 public class Game {
     public static void main(String[] args) {
@@ -57,7 +69,7 @@ public class Game {
         int index = 0;// index of stack that contains the horse that is rolled
         int i = 0;
         boolean gameOver = false;
-        System.out.printf("%s : %d", colour, steps);
+        System.out.printf("%s : %d\n", colour, steps);
         for (Stack<Horse> stack : board) {
             for (Horse horse : stack) {
                 if (horse.getColour() == colour) {
@@ -111,5 +123,78 @@ public class Game {
         }
         System.out.print("------|FINISH|-----\n");
 
+    }
+
+    public static ArrayList<Player> getPlayers(Scanner in) {
+        ArrayList<Player> players = new ArrayList<>();
+        int numberOfPlayers = 0;
+        boolean finishedNum = false;
+        String name;
+
+        while (!finishedNum) {
+            try {
+                System.out.print("Enter the number of players: ");
+                numberOfPlayers = in.nextInt();
+                finishedNum = true;
+            } catch (InputMismatchException e) {
+                System.out.print("Error, enter an integer");
+                in.next();
+                System.out.print("\n");
+            }
+        }
+
+        for (int i = 1; i <= numberOfPlayers; i++) {
+            try {
+                System.out.printf("Enter the %s's players name: ", i);
+                name = in.next();
+                players.add(new Player(name));
+            } catch (InputMismatchException e) {
+                System.out.print(e);
+                i--;
+            }
+        }
+
+        return players;
+    }
+
+    public static int getTurnChoice(String name, Scanner in) {
+        int userChoice = -1;
+        boolean finished = false;
+
+        while (!finished) {
+            try {
+                System.out.println(name + " it is your turn: ");
+                System.out.println("(1)Roll the dice");
+                System.out.println("(2)Take round bet");
+                System.out.println("(3)Place race bet");
+                userChoice = in.nextInt();
+                finished = true;
+            } catch (InputMismatchException e) {
+                System.out.print("Error, enter an integer");
+                in.next();
+                System.out.print("\n");
+            }
+        }
+
+        return userChoice;
+
+    }
+
+    public static ArrayList<Stack<RoundBet>> setRoundBets() {
+        ArrayList<Stack<RoundBet>> roundBets = new ArrayList<>();
+        String[] colours = new String[] { "red", "blue", "green", "yellow", "purple" };
+        int index = 0;
+        for (int i = 0; i < 5; i++) {
+            roundBets.add(new Stack<RoundBet>());
+        }
+        for (Stack<RoundBet> colourStack : roundBets) {
+            colourStack.add(new RoundBet(colours[index], 5));
+            colourStack.add(new RoundBet(colours[index], 3));
+            colourStack.add(new RoundBet(colours[index], 2));
+            colourStack.add(new RoundBet(colours[index], 2));
+            index++;
+        }
+
+        return roundBets;
     }
 }
