@@ -60,4 +60,9 @@ public class Player {
 
     // Methods
 
+    public void addMoney(int money) {
+        int currentMoney = this.getMoney();
+        this.setMoney(currentMoney + money);
+    }
+
 }
