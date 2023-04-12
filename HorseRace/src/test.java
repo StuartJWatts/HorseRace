@@ -48,13 +48,14 @@ public class test {
                         break;
                     }
                     case 2: {
+                        // add defensive programming here
                         RoundBet bet = null;
                         while (bet == null) {
                             System.out.println("which colour would you like");
                             String betChoice = in.next();
                             bet = Game.getRoundBet(betChoice, roundBets);
                             if (bet == null) {
-                                System.out.print("that stack is empty");
+                                System.out.print("that stack is empty ");
                             }
 
                         }
@@ -81,14 +82,19 @@ public class test {
             System.out.println("round over\n");
             // get first and second place at end of round
             String[] winners = Game.getWinners(board);
-            for (String winner : winners) {
-                System.out.println(winner);
-            }
+            System.out.println("First place: " + winners[0]);
+            System.out.println("Second place: " + winners[1]);
 
             // loop through players and add up round bets
             Iterator<Player> x = players.iterator();
             while (x.hasNext()) {
-                x.next().calculateRoundBets(null, null);
+                x.next().calculateRoundBets(winners[0], winners[1]);
+            }
+
+            Iterator<Player> p = players.iterator();
+            while (p.hasNext()) {
+                Player temp = p.next();
+                System.out.print(temp.getName() + " : " + temp.getMoney() + "\n");
             }
         }
 

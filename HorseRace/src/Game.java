@@ -5,10 +5,11 @@ import java.util.Stack;
 
 /*
  * ToDo
- * -add round bets
+ * -find cause for missing horses
+ * -add round bets -done
  * -add race bets
  * -add money tracking 
- * -add jump forward and reverse card\
+ * -add jump forward and reverse card
  * -add reverse horses
  * -make user redo turn choice if roundbet stack is empty of does not have race bet left
  * -hide racebet colour entry field
@@ -205,7 +206,10 @@ public class Game {
         int index = 0;// index of stack that contains the horse that is rolled
         int i = 0;
         for (Stack<RoundBet> stack : roundBets) {
-            if (stack.peek().getColour() == colour) {
+            if (stack.size() == 0) {
+                break;
+            }
+            if (stack.peek().getColour().equals(colour)) {
                 index = i;
                 break;
             }
@@ -227,22 +231,23 @@ public class Game {
         // get second place horse
         String[] winners = new String[2];
         int stringIndex = 0;
-        ArrayList<Stack<Horse>> temp = (ArrayList<Stack<Horse>>) board.clone();
-        for (int i = temp.size() - 1; i > 0; i--) {
-            if (temp.get(i).size() > 1) {// get the colour of the two top horses
-                while (!temp.get(i).isEmpty() && stringIndex < 2) {
+        for (int i = board.size() - 1; i > 0; i--) {
+            Stack<Horse> temp = (Stack<Horse>) board.get(i).clone();
+            if (temp.size() > 1) {// get the colour of the two top horses
+                while (!temp.isEmpty() && stringIndex < 2) {
 
-                    winners[stringIndex] = temp.get(i).pop().getColour();
+                    winners[stringIndex] = temp.pop().getColour();
                     stringIndex++;
                     break;
                 }
-            } else if ((temp.get(i).size() == 1) && stringIndex < 2) {
+            } else if ((temp.size() == 1) && stringIndex < 2) {
 
-                winners[stringIndex] = temp.get(i).pop().getColour();
+                winners[stringIndex] = temp.pop().getColour();
                 stringIndex++;
             } else {
                 continue;
             }
+
         }
 
         return winners;
