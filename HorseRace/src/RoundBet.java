@@ -1,10 +1,11 @@
-public class RoundBet extends RaceBet {
+public class RoundBet {
     // Attributes
     private int value;
+    private String colour;
 
     // Constuctors
     public RoundBet(String colour, int value) {
-        super(colour);
+        setColour(colour);
         setValue(value);
     }
 
@@ -15,6 +16,14 @@ public class RoundBet extends RaceBet {
 
     public int getValue() {
         return value;
+    }
+
+    public void setColour(String colour) {
+        this.colour = colour;
+    }
+
+    public String getColour() {
+        return colour;
     }
     // Methods
 

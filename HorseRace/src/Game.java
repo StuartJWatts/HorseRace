@@ -5,13 +5,14 @@ import java.util.Stack;
 
 /*
  * ToDo
- * -find cause for missing horses
+ * -find cause for missing horses -done
  * -add round bets -done
+ * -add display current round bets
  * -add race bets
- * -add money tracking 
+ * -add money tracking -done 
  * -add jump forward and reverse card
  * -add reverse horses
- * -make user redo turn choice if roundbet stack is empty of does not have race bet left
+ * -make user redo turn choice if roundbet stack is empty or does not have race bet left
  * -hide racebet colour entry field
  * 
  */

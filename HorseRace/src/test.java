@@ -102,4 +102,10 @@ public class test {
 
     }
 
+    public static boolean placeRaceBet(Player player, String colour, Stack<RaceBet> bet) {
+        // check if user still has the race bet they want to bet,
+        // if they dont return-1.
+        // if they do remove it from thier stack and add it to the specific stack
+    }
+
 }
