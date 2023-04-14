@@ -10,6 +10,8 @@ public class test {
         Scanner in = new Scanner(System.in);
         ArrayList<Stack<Horse>> board = new ArrayList<>();
         ArrayList<Player> players = Game.getPlayers(in);
+        Stack<RaceBet> winRaceBets = new Stack<>();
+        Stack<RaceBet> loseRaceBets = new Stack<>();
         int roundStartIndex = (int) Math.random() * (players.size() + 1);
         int currentPlayerIndex;
 
@@ -63,7 +65,13 @@ public class test {
                         break;
                     }
                     case 3: {
-                        System.out.println("Place race bet");
+                        System.out.println("what colour");
+                        String betcolour = in.next();
+                        System.out.print(placeRaceBet(currentPlayer, betcolour, winRaceBets));
+                        Iterator<RaceBet> iter = currentPlayer.getRaceBets().iterator();
+                        while (iter.hasNext()) {
+                            System.out.print(iter.next().getColour() + " ");
+                        }
                         break;
                     }
 
@@ -104,8 +112,31 @@ public class test {
 
     public static boolean placeRaceBet(Player player, String colour, Stack<RaceBet> bet) {
         // check if user still has the race bet they want to bet,
-        // if they dont return-1.
-        // if they do remove it from thier stack and add it to the specific stack
+        // if they dont return false.
+        // if they do remove it from thier stack and add it to the specific stack\
+        ArrayList<RaceBet> raceBets = player.getRaceBets();
+        int size = player.getRaceBets().size();
+        if (size == 0) {
+            return false;
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (raceBets.get(i).getColour().equals(colour)) {
+                    bet.add(raceBets.remove(i));
+                    return true;
+                }
+
+            }
+            return false;
+        }
+    }
+
+    public static void calculateRaceBets(ArrayList<Player> players, Stack<RaceBet> winnerBets,
+            Stack<RaceBet> losserBets) {
+        // go through the stack of bets, award money to the players
+    }
+
+    public static void displayRoundBets(ArrayList<Stack<RoundBet>> roundBets) {
+        // display the round bets remaining on the board
     }
 
 }

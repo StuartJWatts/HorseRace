@@ -50,13 +50,17 @@ public class Player {
         return roundBets;
     }
 
-    public RaceBet placeRaceBet(String colour) {
+    public ArrayList<RaceBet> getRaceBets() {
+        return raceBets;
+    }
+
+    public RaceBet placeRaceBet(int index) {
         // remove racebet of a certain colour from hand and return it
         // deal with capitals here?
         // make all lower case?
         // when user enters in the command line, hide the entry
         // https://stackoverflow.com/questions/10819469/hide-input-on-command-line
-        return null;
+        return raceBets.remove(index);
     }
 
     // Methods
