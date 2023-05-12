@@ -1,10 +1,10 @@
 public class RaceBet {
     // Attributes
     private String colour;
-    private String player;
+    private Player player;
 
     // Constuctors
-    public RaceBet(String colour, String player) {
+    public RaceBet(String colour, Player player) {
         setColour(colour);
         setPlayer(player);
     }
@@ -18,11 +18,11 @@ public class RaceBet {
         return colour;
     }
 
-    public void setPlayer(String player) {
+    public void setPlayer(Player player) {
         this.player = player;
     }
 
-    public String getPlayer() {
+    public Player getPlayer() {
         return player;
     }
     // Methods

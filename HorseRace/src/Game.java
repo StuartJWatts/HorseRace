@@ -8,12 +8,16 @@ import java.util.Stack;
  * -find cause for missing horses -done
  * -add round bets -done
  * -add display current round bets
- * -add race bets
+ * -add race bets - done
+ * -add defensive prog and logic for placing race bets
  * -add money tracking -done 
  * -add jump forward and reverse card
  * -add reverse horses
  * -make user redo turn choice if roundbet stack is empty or does not have race bet left
  * -hide racebet colour entry field
+ * -defensive programming on user input
+ * -fix calc round winners
+ * 
  * 
  */
 

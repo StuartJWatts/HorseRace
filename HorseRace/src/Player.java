@@ -18,11 +18,11 @@ public class Player {
         setMoney(3);
         roundBets = new ArrayList<>();
         raceBets = new ArrayList<>();
-        raceBets.add(new RaceBet("red", name));
-        raceBets.add(new RaceBet("green", name));
-        raceBets.add(new RaceBet("blue", name));
-        raceBets.add(new RaceBet("yellow", name));
-        raceBets.add(new RaceBet("purple", name));
+        raceBets.add(new RaceBet("red", this));
+        raceBets.add(new RaceBet("green", this));
+        raceBets.add(new RaceBet("blue", this));
+        raceBets.add(new RaceBet("yellow", this));
+        raceBets.add(new RaceBet("purple", this));
     }
 
     // Setters and Getters

@@ -105,8 +105,9 @@ public class test {
                 System.out.print(temp.getName() + " : " + temp.getMoney() + "\n");
             }
         }
-
-        System.out.printf("\n\n%s wins!!!\n\n", board.get(15).pop().getColour());
+        String[] winnerAndLoser = getFirstAndLast(board);
+        System.out.printf("\n\n%s wins!!!\n\n", winnerAndLoser[0]);
+        System.out.printf("\n\n%s losses!!!\n\n", winnerAndLoser[1]);
 
     }
 
@@ -131,8 +132,163 @@ public class test {
     }
 
     public static void calculateRaceBets(ArrayList<Player> players, Stack<RaceBet> winnerBets,
-            Stack<RaceBet> losserBets) {
+            Stack<RaceBet> losserBets, ArrayList<Stack<Horse>> board) {
         // go through the stack of bets, award money to the players
+        String[] firstAndLast = getFirstAndLast(board);
+        Stack<RaceBet> winFlip = new Stack<>();
+        Stack<RaceBet> loseFlip = new Stack<>();
+        RaceBet temp;
+        while (winnerBets.size() > 0) {
+            winFlip.push(winnerBets.pop());
+        }
+        while (losserBets.size() > 0) {
+            loseFlip.push(losserBets.pop());
+        }
+
+        int winCount = 0;
+        int loseCount = 0;
+
+        while (winFlip.size() > 0) {
+            temp = winFlip.pop();
+            Player tempPlayer = temp.getPlayer();
+            if (temp.getColour().equals(firstAndLast[0])) {
+
+                switch (winCount) {
+                    case 0: {
+                        tempPlayer.addMoney(8);
+                        winCount++;
+                        break;
+                    }
+                    case 1: {
+                        tempPlayer.addMoney(5);
+                        winCount++;
+                        break;
+                    }
+                    case 2: {
+                        tempPlayer.addMoney(3);
+                        winCount++;
+                        break;
+                    }
+                    case 3: {
+                        tempPlayer.addMoney(2);
+                        winCount++;
+                        break;
+                    }
+                    case 4: {
+                        tempPlayer.addMoney(1);
+                        winCount++;
+                        break;
+                    }
+                    case 5: {
+                        tempPlayer.addMoney(0);
+                        winCount++;
+                        break;
+                    }
+                    default: {
+                        tempPlayer.addMoney(0);
+                        winCount++;
+                        break;
+                    }
+                }
+            } else {
+                tempPlayer.addMoney(-1);
+            }
+
+        }
+
+        while (loseFlip.size() > 0) {
+            temp = loseFlip.pop();
+            Player tempPlayer = temp.getPlayer();
+            if (temp.getColour().equals(firstAndLast[1])) {
+
+                switch (loseCount) {
+                    case 0: {
+                        tempPlayer.addMoney(8);
+                        loseCount++;
+                        break;
+                    }
+                    case 1: {
+                        tempPlayer.addMoney(5);
+                        loseCount++;
+                        break;
+                    }
+                    case 2: {
+                        tempPlayer.addMoney(3);
+                        loseCount++;
+                        break;
+                    }
+                    case 3: {
+                        tempPlayer.addMoney(2);
+                        loseCount++;
+                        break;
+                    }
+                    case 4: {
+                        tempPlayer.addMoney(1);
+                        loseCount++;
+                        break;
+                    }
+                    case 5: {
+                        tempPlayer.addMoney(0);
+                        loseCount++;
+                        break;
+                    }
+                    default: {
+                        tempPlayer.addMoney(0);
+                        break;
+                    }
+                }
+            } else {
+                tempPlayer.addMoney(-1);
+            }
+
+        }
+
+    }
+
+    public static String[] getFirstAndLast(ArrayList<Stack<Horse>> board) {
+        // return the winner and the last place horse
+        // return string with winner in index 0 and loser in index 1
+
+        // use get winners to get first place
+        // find first no zero stack in race direction
+        // if horse in not black or white then add it to the string finish
+        String[] firstAndLast = new String[2];
+        firstAndLast[0] = Game.getWinners(board)[0];
+
+        boolean found = false;
+        for (int i = 0; i < board.size(); i++) {
+            Stack<Horse> temp = (Stack<Horse>) board.get(i).clone();
+            Stack<Horse> tempFlip = new Stack<>();
+            if (temp.size() >= 1) {
+                System.out.print("1");
+                // flip stack
+                // pop and check each horse if black, white or other
+                while (temp.size() > 0) {
+                    tempFlip.push(temp.pop());
+                    System.out.print("2");
+                }
+                while (tempFlip.size() > 0) {
+                    Horse tempHorse = tempFlip.pop();
+                    System.out.print("3");
+                    System.out.print(tempHorse.getColour());
+                    if (tempHorse.getColour() != "black" && tempHorse.getColour() != "white") {
+                        firstAndLast[1] = tempHorse.getColour();
+                        found = true;
+                        break;
+                    }
+                }
+
+            } else {
+                continue;
+            }
+
+            if (found) {
+                System.out.print("break");
+                break;
+            }
+
+        }
+        return firstAndLast;
     }
 
     public static void displayRoundBets(ArrayList<Stack<RoundBet>> roundBets) {
