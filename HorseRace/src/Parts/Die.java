@@ -1,12 +1,12 @@
-public class RaceBet {
+package Parts;
+
+public class Die {
     // Attributes
     private String colour;
-    private Player player;
 
     // Constuctors
-    public RaceBet(String colour, Player player) {
+    public Die(String colour) {
         setColour(colour);
-        setPlayer(player);
     }
 
     // Setters and Getters
@@ -18,13 +18,8 @@ public class RaceBet {
         return colour;
     }
 
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
-
-    public Player getPlayer() {
-        return player;
-    }
     // Methods
-
+    public int roll() {
+        return (int) (Math.random() * 3) + 1;
+    }
 }

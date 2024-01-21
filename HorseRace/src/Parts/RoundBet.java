@@ -1,3 +1,5 @@
+package Parts;
+
 public class RoundBet {
     // Attributes
     private int value;

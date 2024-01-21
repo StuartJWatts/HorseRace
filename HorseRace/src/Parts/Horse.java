@@ -1,3 +1,5 @@
+package Parts;
+
 public class Horse {
     // Attributes
     private String colour;

@@ -1,3 +1,5 @@
+package UI;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -5,7 +7,14 @@ import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Stack;
 
-public class test {
+import Parts.Die;
+import Parts.Game;
+import Parts.Horse;
+import Parts.Player;
+import Parts.RaceBet;
+import Parts.RoundBet;
+
+public class UI {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         ArrayList<Stack<Horse>> board = new ArrayList<>();
